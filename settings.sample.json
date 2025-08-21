@@ -1,0 +1,9 @@
+{
+  "hashAlgorithm": "xxhash64",
+  "onExisting": "overwrite",
+  "generateRemovedList": true,
+  "openExplorerAfterExport": true,
+  "parallelism": 4,
+  "includeExtensions": [".png", ".pdf", ".jpg", ".jpeg"],
+  "recentPairs": []
+}

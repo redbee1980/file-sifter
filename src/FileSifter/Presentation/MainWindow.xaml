@@ -1,0 +1,62 @@
+<Window x:Class="FileSifter.Presentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="file-sifter" Height="480" Width="760"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="12" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Base Folder:" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Margin="6,2" Text="{Binding BaseFolder, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Column="2" Margin="6,2" Content="Browse" Command="{Binding BrowseBaseCommand}" />
+
+        <TextBlock Grid.Row="1" Text="Current Folder:" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="6,2" Text="{Binding CurrentFolder, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Row="1" Grid.Column="2" Margin="6,2" Content="Browse" Command="{Binding BrowseCurrentCommand}" />
+
+        <TextBlock Grid.Row="2" Text="Hash Algorithm:" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" Margin="6,2"
+                  ItemsSource="{Binding HashAlgorithms}"
+                  SelectedItem="{Binding SelectedHashAlgorithm}"/>
+
+        <TextBlock Grid.Row="3" Text="Existing Policy:" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" Margin="6,2"
+                  ItemsSource="{Binding ExistingPolicies}"
+                  SelectedItem="{Binding SelectedExistingPolicy}"/>
+
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,6">
+            <CheckBox Content="Generate removed.txt"
+                      IsChecked="{Binding GenerateRemovedList}"/>
+            <CheckBox Content="Open Explorer after export" Margin="16,0,0,0"
+                      IsChecked="{Binding OpenExplorerAfterExport}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="3" Orientation="Horizontal">
+            <TextBlock Text="Export Folder (optional):" VerticalAlignment="Center"/>
+            <TextBox Width="400" Margin="6,2" Text="{Binding ExportFolder, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Browse" Margin="6,2" Command="{Binding BrowseExportCommand}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="3" Orientation="Vertical">
+            <ProgressBar Height="20" Minimum="0" Maximum="1" Value="{Binding Progress}" />
+            <TextBlock Margin="0,4,0,0" Text="{Binding StatusMessage}" />
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <Button Content="Start" Width="80" Margin="0,0,6,0" Command="{Binding StartCommand}" IsEnabled="{Binding CanStart}"/>
+                <Button Content="Cancel" Width="80" Command="{Binding CancelCommand}" IsEnabled="{Binding CanCancel}"/>
+            </StackPanel>
+
+            <GroupBox Header="Summary" Margin="0,12,0,0">
+                <StackPanel Orientation="Horizontal" Margin="6">
+                    <TextBlock Text="{Binding SummaryDisplay}" TextWrapping="Wrap" Width="700"/>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <TextBlock Grid.Row="7" Grid.ColumnSpan="3" HorizontalAlignment="Right" Opacity="0.6"
+                   Text="file-sifter MVP"/>
+    </Grid>
+</Window>

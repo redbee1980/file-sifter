@@ -1,0 +1,27 @@
+# Build artifacts
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+
+# Logs
+*.log
+log/
+logs/
+
+# Dotnet
+project.lock.json
+artifacts/
+
+# Temp
+tmp/
+temp/
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
