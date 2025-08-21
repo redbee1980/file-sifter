@@ -1,0 +1,54 @@
+name: Build & Basic Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_VERSION: "8.0.x"
+
+jobs:
+  build:
+    name: Build (Release)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+            dotnet-version: ${{ env.DOTNET_VERSION }}
+            cache: true
+            cache-dependency-path: |
+              **/*.csproj
+              **/global.json
+
+      - name: Restore
+        run: dotnet restore ./src/FileSifter/FileSifter.csproj
+
+      - name: Build
+        run: dotnet build ./src/FileSifter/FileSifter.csproj -c Release --no-restore
+
+      # ここに将来テストプロジェクト追加 (例: dotnet test ...)
+      - name: Verify WPF build artifacts
+        run: |
+          if (Test-Path ./src/FileSifter/bin/Release/net8.0-windows/FileSifter.exe) {
+            Write-Host "Executable found."
+          } else {
+            Write-Error "Build artifact not found."
+          }
+
+      - name: Upload artifact (Release build)
+        uses: actions/upload-artifact@v4
+        with:
+          name: file-sifter-build
+          path: |
+            src/FileSifter/bin/Release/net8.0-windows/
+          retention-days: 7

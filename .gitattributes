@@ -1,0 +1,32 @@
+# 改行統一: Git がテキスト判定したファイルは LF を内部正規化
+* text=auto
+
+# 明示的にテキスト扱い（誤検出防止）
+*.cs       text diff=csharp
+*.xaml     text
+*.csproj   text eol=lf
+*.sln      text eol=crlf
+*.md       text
+*.json     text
+*.yml      text
+*.yaml     text
+*.ps1      text
+*.cmd      text
+*.sh       text
+
+# バイナリ扱い（差分無視）
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.pdf      binary
+*.ico      binary
+*.ttf      binary
+*.otf      binary
+*.zip      binary
+
+# GitHub Linguist 調整（必要なら）
+# docs/ をドキュメントとして扱わせたい場合:
+# docs/* linguist-documentation
+
+# 差分ヒント
+diff=csharp
