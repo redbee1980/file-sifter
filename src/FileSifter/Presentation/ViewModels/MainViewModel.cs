@@ -1,11 +1,16 @@
+using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Win32;
 using FileSifter.App;
 using FileSifter.Domain.Config;
 using FileSifter.Services;
 using FileSifter.Domain.Results;
+using FileSifter.Infrastructure.Settings;
 
 namespace FileSifter.Presentation.ViewModels;
 
@@ -72,23 +77,23 @@ public sealed class MainViewModel : INotifyPropertyChanged
     #region Commands
     public ICommand BrowseBaseCommand => new RelayCommand(_ =>
     {
-        var dlg = new System.Windows.Forms.FolderBrowserDialog();
-        if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            BaseFolder = dlg.SelectedPath;
+        var dlg = new OpenFolderDialog();
+        if (dlg.ShowDialog() == true)
+            BaseFolder = dlg.FolderName;
     });
 
     public ICommand BrowseCurrentCommand => new RelayCommand(_ =>
     {
-        var dlg = new System.Windows.Forms.FolderBrowserDialog();
-        if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            CurrentFolder = dlg.SelectedPath;
+        var dlg = new OpenFolderDialog();
+        if (dlg.ShowDialog() == true)
+            CurrentFolder = dlg.FolderName;
     });
 
     public ICommand BrowseExportCommand => new RelayCommand(_ =>
     {
-        var dlg = new System.Windows.Forms.FolderBrowserDialog();
-        if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            ExportFolder = dlg.SelectedPath;
+        var dlg = new OpenFolderDialog();
+        if (dlg.ShowDialog() == true)
+            ExportFolder = dlg.FolderName;
     });
 
     public ICommand StartCommand => new RelayCommand(async _ => await StartAsync(), _ => CanStart);

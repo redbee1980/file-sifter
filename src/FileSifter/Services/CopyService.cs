@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace FileSifter.Services;
 
 public sealed class CopyService

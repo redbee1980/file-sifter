@@ -17,7 +17,7 @@ public sealed class AppSettings
 
     public void Normalize()
     {
-        var fallback = new[] { ".png", ".pdf", ".jpg", ".jpeg" };
+        var fallback = new List<string> { ".png", ".pdf", ".jpg", ".jpeg" };
         var source = (IncludeExtensions == null || IncludeExtensions.Count == 0)
             ? fallback
             : IncludeExtensions;

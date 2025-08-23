@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Security.Cryptography;
 using K4os.Hash.xxHash;
 
@@ -27,11 +29,11 @@ public sealed class HashService
     private ulong ComputeXxHash(string path)
     {
         using var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 64 * 1024, FileOptions.SequentialScan);
-        ulong state = 0;
+        var xxh64 = new K4os.Hash.xxHash.XXH64();
         int read;
         while ((read = fs.Read(_buffer, 0, _buffer.Length)) > 0)
-            state = XxHash64.DigestOf(state, _buffer.AsSpan(0, read));
-        return state;
+            xxh64.Update(_buffer.AsSpan(0, read));
+        return xxh64.Digest();
     }
 
     private byte[] ComputeSha256(string path)
