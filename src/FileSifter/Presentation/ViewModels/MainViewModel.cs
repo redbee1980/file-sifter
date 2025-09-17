@@ -1,15 +1,11 @@
-using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Win32;
 using FileSifter.App;
 using FileSifter.Domain.Config;
 using FileSifter.Services;
-using FileSifter.Domain.Results;
 using FileSifter.Infrastructure.Settings;
 
 namespace FileSifter.Presentation.ViewModels;

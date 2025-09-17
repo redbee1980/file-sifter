@@ -1,7 +1,5 @@
-using System;
 using System.IO;
 using System.Security.Cryptography;
-using K4os.Hash.xxHash;
 
 namespace FileSifter.Services;
 

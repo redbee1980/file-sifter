@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace FileSifter.Domain.Config;
 
 public sealed class AppSettings

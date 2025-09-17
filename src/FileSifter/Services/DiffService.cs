@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using FileSifter.Domain.Config;
 using FileSifter.Domain.Models;
 using FileSifter.Domain.Results;
-using FileSifter.Infrastructure.Export;
 using FileSifter.Infrastructure.Scanning;
+using System.IO;
 
 namespace FileSifter.Services;
 
